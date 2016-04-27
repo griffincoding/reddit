@@ -1,0 +1,21 @@
+<div id="channels">
+
+</div>
+<div id="new-channel">
+  <input type="text" name="title" />
+  <button id="new-channel-btn">New Channel</button>
+</div>
+
+<script type="text/javascript">
+  $.ajaxSetup({
+    headers: {
+      'Accept': 'application/json'
+    }
+  });
+  
+  $.get('/channels', function(data)  {
+    console.log('getting channels');
+    console.log(data);
+  });
+
+</script>

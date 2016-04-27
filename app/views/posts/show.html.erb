@@ -1,0 +1,6 @@
+<h1> Post: <%= @post.body %> </h1>
+
+<%= render @post.comments %>
+
+<%= link_to 'New comment', [:new, @channel, @post, :comment] %>
+<%= link_to 'New comment', new_channel_post_comment_path(@channel, @post) %>

@@ -1,0 +1,16 @@
+<h1>Listing channels</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Description</th>
+  </tr>
+
+  <% @channels.each do |channel| %>
+    <tr>
+      <td><%= channel.title %></td>
+      <td><%= channel.description %></td>
+      <td><%= link_to 'Show', channel_path(channel) %></td>
+    </tr>
+  <% end %>
+</table>

@@ -1,0 +1,11 @@
+<h2>Channel page</h2>
+<p>
+  <strong>Title:</strong>
+  <%= @channel.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @channel.description %>
+</p>
+<td><%= link_to 'New post', new_channel_post_path(@channel) %></td>

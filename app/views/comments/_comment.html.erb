@@ -1,0 +1,6 @@
+<p>
+  <strong>Comment:</strong>
+  <%= comment.body %>
+  <%= link_to 'reply', [@channel, @post, comment, :reply] %>
+  <%= link_to 'reply', channel_post_comment_reply_path(@channel, @post, comment) %>
+</p>
