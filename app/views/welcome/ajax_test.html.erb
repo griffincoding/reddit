@@ -1,21 +1,61 @@
-<div id="channels">
+<div id="content-wrapper">
 
-</div>
-<div id="new-channel">
-  <input type="text" name="title" />
-  <button id="new-channel-btn">New Channel</button>
+  <div id="channels"></div>
+
+  <div id="new-channel">
+    <div>
+      <span><strong>Title:</strong></span>
+      <span><input type="text" name="title" id="new-title" /></span>
+    </div>
+    <div>
+      <span><strong>Description:</strong></span>
+      <span><input type="text" name="description" id="new-description" /></span>
+    </div>
+    <button id="new-channel-btn">New Channel</button>
+  </div>
 </div>
 
 <script type="text/javascript">
   $.ajaxSetup({
     headers: {
-      'Accept': 'application/json'
+      'Accept': 'application/json',
+      'Content-type': 'application/json'
     }
   });
-  
-  $.get('/channels', function(data)  {
-    console.log('getting channels');
-    console.log(data);
+
+  // THIS IS WHY THEY INVENTED TEMPLATE SYSTEMS!
+  var manuallyRenderChannels = function(data) {
+    var html = '';
+    data.forEach(function(channel) {
+      html += '<div class="channel">'
+           +  '  <span class="field title"><strong>Title:</strong> ' + channel.title + '</span>'
+           +  '  <span class="field description"><strong>Description:</strong> ' + channel.description + '</span>'
+           +  '</div>';
+    });
+    $('#channels').html(html);
+  }
+
+  var loadChannels = function() {
+    $.get('/channels', function(channels)  {
+      console.log('getting channels');
+      console.log(channels);
+      manuallyRenderChannels(channels)
+    });
+  };
+
+  $("#new-channel-btn").click(function() {
+    console.log('new channel button click');
+    $.post('/channels', JSON.stringify({
+      'channel': {
+        'title': $('#new-title').val(),
+        'description': $('#new-description').val()
+      }
+    }), function(channel) {
+      console.log('new channel complete');
+      console.log(channel);
+      loadChannels();
+    });
   });
 
+  loadChannels();
 </script>
